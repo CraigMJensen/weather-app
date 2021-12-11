@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    <title>Weather Forecast</title>
+  </head>
+  <body>
+    <header>
+      <div id="header">
+        <h1 id="titleText">Weather Dashboard</h1>
+      </div>
+    </header>
+    <main id="container">
+      <aside class="city-search">
+        <label for="city"><h2>Search for a City:</h2></label>
+        <input type="text" name="city" /><br /><br />
+        <input type="submit" value="Search" /><br />
+        <hr />
+        <br />
+        <div class="prevCity"></div>
+      </aside>
+      <div id="currentWeatherContainer">
+        <div class="current-weather">
+          <h2 class="city-date">current city</h2>
+          <p class="temp">temp:</p>
+          <p class="wind">wind:</p>
+          <p class="humidity">humidity:</p>
+          <p class="uvIndex">UV Index:</p>
+        </div>
+        <div id="fiveDayForecast">
+          <h3 class="title">5-Day Forecast</h3>
+          <div class="card-container">
+            <div class="forecast-card">day 1</div>
+            <div class="forecast-card">day 2</div>
+            <div class="forecast-card">day 3</div>
+            <div class="forecast-card">day 4</div>
+            <div class="forecast-card">day 5</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
