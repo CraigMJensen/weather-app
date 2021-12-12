@@ -1,7 +1,7 @@
 // variables
 var searchBtnEl = document.querySelector('.search-btn');
 var searchFieldEl = document.querySelector('#searchField');
-
+var cityDateEl = document.querySelector('.city-date');
 var currentWeatherEl = document.querySelector('.current-weather');
 var searchAsideEl = document.querySelector('.city-search');
 var fetchId = '&appid=ba973368929878e06f2318c9fa6bd307';
@@ -16,7 +16,8 @@ var getWeatherData = function () {
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        searchWeather();
+        cityDateEl.textContent = searchFieldEl.value;
+        createCityButtons();
       });
     }
   });
@@ -25,7 +26,7 @@ var getWeatherData = function () {
 };
 
 // This function searches for a city and adds buttons for previously searched cities
-var searchWeather = function () {
+var createCityButtons = function () {
   if (searchFieldEl == '') {
     alert('Please enter a valid city name');
   } else if (searchFieldEl) {
@@ -63,6 +64,7 @@ var saveData = function () {
 var clearText = function () {
   searchFieldEl.value = '';
 };
+
 // event listeners
 searchBtnEl.addEventListener('click', getWeatherData);
 
