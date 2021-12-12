@@ -15,8 +15,6 @@ body {
 }
 
 #currentWeatherContainer {
-  margin-left: 2em;
-  margin-right: 2em;
   width: 100%;
 }
 
@@ -48,8 +46,8 @@ body {
 }
 
 .current-weather {
-  margin: 0;
-  width: 70%;
+  margin: auto;
+  width: 80%;
   background-color: white;
   padding: 0.5em;
 }
