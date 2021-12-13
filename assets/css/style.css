@@ -14,10 +14,6 @@ body {
   display: flex;
 }
 
-#currentWeatherContainer {
-  width: 100%;
-}
-
 .city-search {
   text-align: center;
   width: 25%;
