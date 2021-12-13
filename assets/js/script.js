@@ -1,8 +1,13 @@
 // variables
 var searchBtnEl = document.querySelector('.search-btn');
 var searchFieldEl = document.querySelector('#searchField');
-var cityDateEl = document.querySelector('.city-date');
+
 var currentWeatherEl = document.querySelector('.current-weather');
+var cityDateEl = document.querySelector('.city-date');
+var cityTempEl = document.querySelector('.temp');
+var cityFeelsEl = document.querySelector('.feels-like');
+var cityHumidityEl = document.querySelector('.humidity');
+var weatherDescriptionEl = document.querySelector('.weather');
 var searchAsideEl = document.querySelector('.city-search');
 var fetchId = '&appid=ba973368929878e06f2318c9fa6bd307';
 
@@ -11,18 +16,45 @@ var getWeatherData = function () {
   var apiUrl =
     'https://api.openweathermap.org/data/2.5/weather?q=' +
     searchFieldEl.value +
+    '&units=imperial' +
     fetchId;
 
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        cityDateEl.textContent = searchFieldEl.value;
+        cityDateEl.textContent = data.name;
+        cityTempEl.innerHTML =
+          'Current Temp: ' + Math.round(data.main.temp) + ' F';
+        cityFeelsEl.innerHTML =
+          'Real Feels: ' + Math.round(data.main.feels_like) + ' F';
+        cityHumidityEl.innerHTML = 'Humidity: ' + data.main.humidity + '%';
+        weatherDescriptionEl.innerHTML = data.weather[0].description;
+        console.log(data);
         createCityButtons();
+        fiveDayForecast();
       });
     }
   });
 
   console.log(searchFieldEl.value);
+};
+
+var fiveDayForecast = function () {
+  var apiUrl =
+    'https://api.openweathermap.org/data/2.5/forecast?q=' +
+    searchFieldEl.value +
+    '&units=imperial' +
+    fetchId;
+
+  fetch(apiUrl).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        console.log(data);
+      });
+    }
+  });
+  console.log(apiUrl);
+  clearText();
 };
 
 // This function searches for a city and adds buttons for previously searched cities
@@ -40,7 +72,6 @@ var createCityButtons = function () {
   }
 
   saveData();
-  clearText();
 };
 
 // Use to test functionality of dynamic button clicks

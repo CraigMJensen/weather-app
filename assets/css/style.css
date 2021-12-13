@@ -60,3 +60,7 @@ body {
   display: flex;
   justify-content: space-evenly;
 }
+
+.card {
+  border: 2px solid darkblue;
+}
