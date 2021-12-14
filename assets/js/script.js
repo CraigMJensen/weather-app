@@ -73,16 +73,28 @@ var fiveDayForecast = function () {
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        // 5 Day Weather Card 0
+        // 5 Day Weather Cards
         var i = 4;
+        var cardData = [
+          (cardDateEl.innerHTML = data.list[i].dt_txt),
+          (cardTempEl.innerHTML =
+            'Temp: ' + Math.round(data.list[i].main.temp) + ' F'),
+          (cardRealTempEl.innerHTML =
+            'Real Feel: ' + Math.round(data.list[i].main.feels_like) + ' F'),
+          (cardHumidityEl.innerHTML = data.list[i].main.humidity + '%'),
+          (cardWeatherEl.innerHTML = data.list[i].weather[0].description),
+        ];
+        var savedCardWeatherData = [];
 
-        cardDateEl.innerHTML = data.list[i].dt_txt;
-        cardTempEl.innerHTML =
-          'Temp: ' + Math.round(data.list[i].main.temp) + ' F';
-        cardRealTempEl.innerHTML =
-          'Real Feel: ' + Math.round(data.list[i].main.feels_like) + ' F';
-        cardHumidityEl.innerHTML = data.list[i].main.humidity + '%';
-        cardWeatherEl.innerHTML = data.list[i].weather[0].description;
+        savedCardWeatherData =
+          JSON.parse(localStorage.getItem('fiveDayCityData')) || [];
+
+        savedCardWeatherData.push(cardData);
+
+        localStorage.setItem(
+          'fiveDayCityData',
+          JSON.stringify(savedCardWeatherData)
+        );
       });
     }
   });
