@@ -9,7 +9,7 @@ var cityNameEl = document.querySelector('.city');
 var cityTempEl = document.querySelector('.temp');
 var cityFeelsEl = document.querySelector('.feels-like');
 var cityHumidityEl = document.querySelector('.humidity');
-var weatherDescriptionEl = document.querySelector('.weather');
+var cityWeatherEl = document.querySelector('.weather');
 
 // 5 Day Forecast Data
 var cardDateEl = document.querySelector('.card-title');
@@ -17,30 +17,6 @@ var cardTempEl = document.querySelector('.temp');
 var cardRealTempEl = document.querySelector('.real-temp');
 var cardHumidityEl = document.querySelector('.humidity');
 var cardWeatherEl = document.querySelector('.weather');
-
-// var weatherCardEl1 = document.querySelector('#weatherCard1');
-// var cardTempEl1 = document.querySelector('.temp1');
-// var cardRealTempEl1 = document.querySelector('.real-temp1');
-// var cardHumidityEl1 = document.querySelector('.humidity1');
-// var cardWeatherEl1 = document.querySelector('.weather1');
-
-// var weatherCardEl2 = document.querySelector('#weatherCard2');
-// var cardTempEl2 = document.querySelector('.temp2');
-// var cardRealTempEl2 = document.querySelector('.real-temp2');
-// var cardHumidityEl2 = document.querySelector('.humidity2');
-// var cardWeatherEl2 = document.querySelector('.weather2');
-
-// var weatherCardEl3 = document.querySelector('#weatherCard3');
-// var cardTempEl3 = document.querySelector('.temp3');
-// var cardRealTempEl3 = document.querySelector('.real-temp3');
-// var cardHumidityEl3 = document.querySelector('.humidity3');
-// var cardWeatherEl3 = document.querySelector('.weather3');
-
-// var weatherCardEl4 = document.querySelector('#weatherCard4');
-// var cardTempEl4 = document.querySelector('.temp4');
-// var cardRealTempEl4 = document.querySelector('.real-temp4');
-// var cardHumidityEl4 = document.querySelector('.humidity4');
-// var cardWeatherEl4 = document.querySelector('.weather4');
 
 // Fetch Data
 var searchAsideEl = document.querySelector('.city-search');
@@ -64,7 +40,7 @@ var getWeatherData = function () {
           (cityFeelsEl.innerHTML =
             'Real Feels: ' + Math.round(data.main.feels_like) + ' F'),
           (cityHumidityEl.innerHTML = 'Humidity: ' + data.main.humidity + '%'),
-          (weatherDescriptionEl.innerHTML = data.weather[0].description),
+          (cityWeatherEl.innerHTML = data.weather[0].description),
         ];
         var savedCityWeatherData = [];
 
@@ -100,34 +76,13 @@ var fiveDayForecast = function () {
         // 5 Day Weather Card 0
         var i = 4;
 
-        var cardDate = (cardDateEl.innerHTML = data.list[i].dt_txt);
-        var cardTemp = (cardTempEl.innerHTML =
-          'Temp: ' + Math.round(data.list[i].main.temp) + ' F');
-        var cardRealTemp = (cardRealTempEl.innerHTML =
-          'Real Feel: ' + Math.round(data.list[i].main.feels_like) + ' F');
-        var cardHumidity = (cardHumidityEl.innerHTML =
-          data.list[i].main.humidity + '%');
-        var cardWeather = (cardWeatherEl.innerHTML =
-          data.list[i].weather[0].description);
-
-        var fiveDayForecastList = [
-          cardDate,
-          cardTemp,
-          cardRealTemp,
-          cardHumidity,
-          cardWeather,
-        ];
-        console.log(fiveDayForecastList);
-
-        savedFiveDayForecast =
-          JSON.parse(localStorage.getItem('fiveDayCityData')) || [];
-
-        savedFiveDayForecast.push(fiveDayForecastList);
-
-        localStorage.setItem(
-          'fiveDayCityData',
-          JSON.stringify(savedFiveDayForecast)
-        );
+        cardDateEl.innerHTML = data.list[i].dt_txt;
+        cardTempEl.innerHTML =
+          'Temp: ' + Math.round(data.list[i].main.temp) + ' F';
+        cardRealTempEl.innerHTML =
+          'Real Feel: ' + Math.round(data.list[i].main.feels_like) + ' F';
+        cardHumidityEl.innerHTML = data.list[i].main.humidity + '%';
+        cardWeatherEl.innerHTML = data.list[i].weather[0].description;
       });
     }
   });
