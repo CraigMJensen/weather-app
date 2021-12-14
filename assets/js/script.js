@@ -4,7 +4,7 @@ var searchFieldEl = document.querySelector('#searchField');
 
 // Weather Element Data
 var currentWeatherEl = document.querySelector('.current-weather');
-var cityDateEl = document.querySelector('.city-date');
+var cityNameEl = document.querySelector('.city');
 var cityTempEl = document.querySelector('.temp');
 var cityFeelsEl = document.querySelector('.feels-like');
 var cityHumidityEl = document.querySelector('.humidity');
@@ -56,21 +56,33 @@ var getWeatherData = function () {
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        cityDateEl.textContent = data.name;
-        cityTempEl.innerHTML =
-          'Current Temp: ' + Math.round(data.main.temp) + ' F';
-        cityFeelsEl.innerHTML =
-          'Real Feels: ' + Math.round(data.main.feels_like) + ' F';
-        cityHumidityEl.innerHTML = 'Humidity: ' + data.main.humidity + '%';
-        weatherDescriptionEl.innerHTML = data.weather[0].description;
-        console.log(data);
+        var cityWeatherData = [
+          (cityNameEl.textContent = data.name),
+          (cityTempEl.innerHTML =
+            'Current Temp: ' + Math.round(data.main.temp) + ' F'),
+          (cityFeelsEl.innerHTML =
+            'Real Feels: ' + Math.round(data.main.feels_like) + ' F'),
+          (cityHumidityEl.innerHTML = 'Humidity: ' + data.main.humidity + '%'),
+          (weatherDescriptionEl.innerHTML = data.weather[0].description),
+        ];
+        // var savedCityWeatherData = [];
+
+        savedCityWeatherData =
+          JSON.parse(localStorage.getItem('currentCityData')) || [];
+
+        savedCityWeatherData.push(cityWeatherData);
+
+        localStorage.setItem(
+          'currentCityData',
+          JSON.stringify(savedCityWeatherData)
+        );
+
+        console.log();
         createCityButtons();
         fiveDayForecast();
       });
     }
   });
-
-  console.log(searchFieldEl.value);
 };
 
 // Fetches 5 Day Forecast from openweathermap.org
@@ -133,7 +145,7 @@ var fiveDayForecast = function () {
       });
     }
   });
-  console.log(apiUrl);
+
   clearText();
 };
 
@@ -169,6 +181,7 @@ var saveData = function () {
   savedWeatherData.push(searchFieldEl);
 
   localStorage.setItem('weatherData', JSON.stringify(savedWeatherData));
+  console.log(savedWeatherData);
 };
 
 // Clears the form for easier usability
