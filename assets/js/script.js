@@ -13,10 +13,10 @@ var cityWeatherEl = document.querySelector('.weather');
 
 // 5 Day Forecast Data
 var cardDateEl = document.querySelector('.card-title');
-var cardTempEl = document.querySelector('.temp');
-var cardRealTempEl = document.querySelector('.real-temp');
-var cardHumidityEl = document.querySelector('.humidity');
-var cardWeatherEl = document.querySelector('.weather');
+var cardTempEl = document.querySelector('.card-temp');
+var cardRealTempEl = document.querySelector('.card-real-temp');
+var cardHumidityEl = document.querySelector('.card-humidity');
+var cardWeatherEl = document.querySelector('.card-weather');
 
 // Fetch Data
 var searchAsideEl = document.querySelector('.city-search');
