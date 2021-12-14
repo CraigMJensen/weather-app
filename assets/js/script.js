@@ -65,7 +65,7 @@ var getWeatherData = function () {
           (cityHumidityEl.innerHTML = 'Humidity: ' + data.main.humidity + '%'),
           (weatherDescriptionEl.innerHTML = data.weather[0].description),
         ];
-        // var savedCityWeatherData = [];
+        var savedCityWeatherData = [];
 
         savedCityWeatherData =
           JSON.parse(localStorage.getItem('currentCityData')) || [];
@@ -97,97 +97,98 @@ var fiveDayForecast = function () {
     if (response.ok) {
       response.json().then(function (data) {
         // 5 Day Weather Card 0
-        weatherCardEl0.innerHTML = data.list[2].dt_txt;
-        cardTempEl0.innerHTML =
-          'Temp: ' + Math.round(data.list[2].main.temp) + ' F';
-        cardRealTempEl0.innerHTML =
-          'Real Feel: ' + Math.round(data.list[2].main.feels_like) + ' F';
-        cardHumidityEl0.innerHTML = data.list[2].main.humidity + '%';
-        cardWeatherEl0.innerHTML = data.list[2].weather[0].description;
+        var i = 4;
 
-        // 5 Day Weather Card 1
-        weatherCardEl1.innerHTML = data.list[10].dt_txt;
-        cardTempEl1.innerHTML =
-          'Temp: ' + Math.round(data.list[10].main.temp) + ' F';
-        cardRealTempEl1.innerHTML =
-          'Real Feel: ' + Math.round(data.list[10].main.feels_like) + ' F';
-        cardHumidityEl1.innerHTML = data.list[10].main.humidity + '%';
-        cardWeatherEl1.innerHTML = data.list[10].weather[0].description;
+        var fiveDayForecast = [
+          [
+            (weatherCardEl0.innerHTML = data.list[i].dt_txt),
+            (cardTempEl0.innerHTML =
+              'Temp: ' + Math.round(data.list[i].main.temp) + ' F'),
+            (cardRealTempEl0.innerHTML =
+              'Real Feel: ' + Math.round(data.list[i].main.feels_like) + ' F'),
+            (cardHumidityEl0.innerHTML = data.list[i].main.humidity + '%'),
+            (cardWeatherEl0.innerHTML = data.list[i].weather[0].description),
+          ],
+          // 5 Day Weather Card 1
+          [
+            (weatherCardEl1.innerHTML = data.list[i + 8].dt_txt),
+            (cardTempEl1.innerHTML =
+              'Temp: ' + Math.round(data.list[i + 8].main.temp) + ' F'),
+            (cardRealTempEl1.innerHTML =
+              'Real Feel: ' +
+              Math.round(data.list[i + 8].main.feels_like) +
+              ' F'),
+            (cardHumidityEl1.innerHTML = data.list[i + 8].main.humidity + '%'),
+            (cardWeatherEl1.innerHTML =
+              data.list[i + 8].weather[0].description),
+          ],
+          // 5 Day Weather Card 2
+          [
+            (weatherCardEl2.innerHTML = data.list[i + 16].dt_txt),
+            (cardTempEl2.innerHTML =
+              'Temp: ' + Math.round(data.list[i + 16].main.temp) + ' F'),
+            (cardRealTempEl2.innerHTML =
+              'Real Feel: ' +
+              Math.round(data.list[i + 16].main.feels_like) +
+              ' F'),
+            (cardHumidityEl2.innerHTML = data.list[i + 16].main.humidity + '%'),
+            (cardWeatherEl2.innerHTML =
+              data.list[i + 16].weather[0].description),
+          ],
+          // 5 Day Weather Card 3
+          [
+            (weatherCardEl3.innerHTML = data.list[i + 24].dt_txt),
+            (cardTempEl3.innerHTML =
+              'Temp: ' + Math.round(data.list[i + 24].main.temp) + ' F'),
+            (cardRealTempEl3.innerHTML =
+              'Real Feel: ' +
+              Math.round(data.list[i + 24].main.feels_like) +
+              ' F'),
+            (cardHumidityEl3.innerHTML = data.list[i + 24].main.humidity + '%'),
+            (cardWeatherEl3.innerHTML =
+              data.list[i + 24].weather[0].description),
+          ],
+          // 5 Day Weather Card 4
+          [
+            (weatherCardEl4.innerHTML = data.list[i + 32].dt_txt),
+            (cardTempEl4.innerHTML =
+              'Temp: ' + Math.round(data.list[i + 32].main.temp) + ' F'),
+            (cardRealTempEl4.innerHTML =
+              'Real Feel: ' +
+              Math.round(data.list[i + 32].main.feels_like) +
+              ' F'),
+            (cardHumidityEl4.innerHTML = data.list[i + 32].main.humidity + '%'),
+            (cardWeatherEl4.innerHTML =
+              data.list[i + 32].weather[0].description),
+          ],
+        ];
+        savedFiveDayForecast =
+          JSON.parse(localStorage.getItem('fiveDayCityData')) || [];
 
-        // 5 Day Weather Card 2
-        weatherCardEl2.innerHTML = data.list[18].dt_txt;
-        cardTempEl2.innerHTML =
-          'Temp: ' + Math.round(data.list[18].main.temp) + ' F';
-        cardRealTempEl2.innerHTML =
-          'Real Feel: ' + Math.round(data.list[18].main.feels_like) + ' F';
-        cardHumidityEl2.innerHTML = data.list[18].main.humidity + '%';
-        cardWeatherEl2.innerHTML = data.list[18].weather[0].description;
+        savedFiveDayForecast.push(fiveDayForecast);
 
-        // 5 Day Weather Card 3
-        weatherCardEl3.innerHTML = data.list[26].dt_txt;
-        cardTempEl3.innerHTML =
-          'Temp: ' + Math.round(data.list[26].main.temp) + ' F';
-        cardRealTempEl3.innerHTML =
-          'Real Feel: ' + Math.round(data.list[26].main.feels_like) + ' F';
-        cardHumidityEl3.innerHTML = data.list[26].main.humidity + '%';
-        cardWeatherEl3.innerHTML = data.list[26].weather[0].description;
-
-        // 5 Day Weather Card 4
-        weatherCardEl4.innerHTML = data.list[34].dt_txt;
-        cardTempEl4.innerHTML =
-          'Temp: ' + Math.round(data.list[34].main.temp) + ' F';
-        cardRealTempEl4.innerHTML =
-          'Real Feel: ' + Math.round(data.list[34].main.feels_like) + ' F';
-        cardHumidityEl4.innerHTML = data.list[34].main.humidity + '%';
-        cardWeatherEl4.innerHTML = data.list[34].weather[0].description;
-
-        console.log(data);
+        localStorage.setItem(
+          'fiveDayCityData',
+          JSON.stringify(savedFiveDayForecast)
+        );
       });
     }
   });
-
-  clearText();
 };
 
 // This function searches for a city and adds buttons for previously searched cities
 var createCityButtons = function () {
-  if (searchFieldEl == '') {
-    alert('Please enter a valid city name');
-  } else if (searchFieldEl) {
-    var savedCity = document.createElement('button');
-    savedCity.addEventListener('click', write, false);
-    savedCity.setAttribute('class', 'search-btn btn btn-secondary');
-    savedCity.setAttribute('id', 'savedCityBtn' + searchFieldEl.value);
-    savedCity.setAttribute('style', 'margin:0.25em;');
-    savedCity.textContent = searchFieldEl.value;
-    searchAsideEl.append(savedCity);
-  }
-
-  saveData();
+  var savedCity = document.createElement('button');
+  savedCity.addEventListener('click', getPreviousData, false);
+  savedCity.setAttribute('class', 'search-btn btn btn-secondary');
+  savedCity.setAttribute('id', 'savedCityBtn' + searchFieldEl.value);
+  savedCity.setAttribute('style', 'margin:0.25em;');
+  savedCity.textContent = searchFieldEl.value;
+  searchAsideEl.append(savedCity);
 };
 
 // Use to test functionality of dynamic button clicks
-var write = function () {
-  console.log('hello');
-};
-
-// Function to save to local storage
-var saveData = function () {
-  var searchFieldEl = document.getElementById('searchField').value.trim();
-  var savedWeatherData = [];
-
-  savedWeatherData = JSON.parse(localStorage.getItem('weatherData')) || [];
-
-  savedWeatherData.push(searchFieldEl);
-
-  localStorage.setItem('weatherData', JSON.stringify(savedWeatherData));
-  console.log(savedWeatherData);
-};
-
-// Clears the form for easier usability
-var clearText = function () {
-  searchFieldEl.value = '';
-};
+var getPreviousData = function () {};
 
 // event listeners
 searchBtnEl.addEventListener('click', getWeatherData);
