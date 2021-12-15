@@ -1,121 +1,72 @@
-// variables
-var searchBtnEl = document.querySelector('.search-btn');
-var searchFieldEl = document.querySelector('#searchField');
-var cardContainerEl = document.querySelector('.card-container');
+// Variables
+var citySearchForm = document.querySelector('#cityForm');
+var citySearchInput = document.querySelector('#cityInput');
+var previousCitySearch = document.querySelector('#searchedCity');
+var currentWeatherEl = document.querySelector('#currentWeatherContainer');
+var fiveDayForecastTitle = document.querySelector('#forecastTitle');
+var fiveDayForecastEl = document.querySelector('#forecastContainer');
+var previousSearchBtns = document.querySelector('#previousSearchBtns');
 
-// Weather Element Data
-var currentWeatherEl = document.querySelector('.current-weather');
-var cityNameEl = document.querySelector('.city');
-var cityTempEl = document.querySelector('.temp');
-var cityFeelsEl = document.querySelector('.feels-like');
-var cityHumidityEl = document.querySelector('.humidity');
-var cityWeatherEl = document.querySelector('.weather');
+// Array to store user city inputs
+var cities = [];
 
-// 5 Day Forecast Data
-var cardDateEl = document.querySelector('.card-title');
-var cardTempEl = document.querySelector('.card-temp');
-var cardRealTempEl = document.querySelector('.card-real-temp');
-var cardHumidityEl = document.querySelector('.card-humidity');
-var cardWeatherEl = document.querySelector('.card-weather');
+var formSubmit = function (event) {
+  event.preventDefault();
+  var city = citySearchInput.value.trim();
 
-// Fetch Data
-var searchAsideEl = document.querySelector('.city-search');
-var fetchId = '&appid=ba973368929878e06f2318c9fa6bd307';
+  if (city) {
+    currentWeather(city);
+    // fiveDayForecast(city);
 
-// This function fetchs the API data from openweathermap.org
-var getWeatherData = function () {
-  var apiUrl =
-    'https://api.openweathermap.org/data/2.5/weather?q=' +
-    searchFieldEl.value +
-    '&units=imperial' +
-    fetchId;
+    cities.unshift({ city });
+    citySearchInput.value = '';
+  } else {
+    alert('Please enter a city name');
+  }
+
+  savedCities();
+
+  // previousSearchBtns(city);
+};
+
+var savedCities = function () {
+  localStorage.setItem('cities', JSON.stringify(cities));
+};
+
+var currentWeather = function (city) {
+  var apiKey = `ba973368929878e06f2318c9fa6bd307`;
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 
   fetch(apiUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        var cityWeatherData = [
-          (cityNameEl.textContent = data.name),
-          (cityTempEl.innerHTML =
-            'Current Temp: ' + Math.round(data.main.temp) + ' F'),
-          (cityFeelsEl.innerHTML =
-            'Real Feels: ' + Math.round(data.main.feels_like) + ' F'),
-          (cityHumidityEl.innerHTML = 'Humidity: ' + data.main.humidity + '%'),
-          (cityWeatherEl.innerHTML = data.weather[0].description),
-        ];
-        var savedCityWeatherData = [];
-
-        savedCityWeatherData =
-          JSON.parse(localStorage.getItem('currentCityData')) || [];
-
-        savedCityWeatherData.push(cityWeatherData);
-
-        localStorage.setItem(
-          'currentCityData',
-          JSON.stringify(savedCityWeatherData)
-        );
-
-        console.log();
-        createCityButtons();
-        fiveDayForecast();
-      });
-    }
+    response.json().then(function (data) {
+      displayCurrentWeather(data, city);
+    });
   });
 };
 
-// Fetches 5 Day Forecast from openweathermap.org
-var fiveDayForecast = function () {
-  var apiUrl =
-    'https://api.openweathermap.org/data/2.5/forecast?q=' +
-    searchFieldEl.value +
-    '&units=imperial' +
-    fetchId;
-
-  fetch(apiUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        // 5 Day Weather Cards
-        var i = 4;
-        var cardData = [
-          (cardDateEl.innerHTML = data.list[i].dt_txt),
-          (cardTempEl.innerHTML =
-            'Temp: ' + Math.round(data.list[i].main.temp) + ' F'),
-          (cardRealTempEl.innerHTML =
-            'Real Feel: ' + Math.round(data.list[i].main.feels_like) + ' F'),
-          (cardHumidityEl.innerHTML = data.list[i].main.humidity + '%'),
-          (cardWeatherEl.innerHTML = data.list[i].weather[0].description),
-        ];
-        var savedCardWeatherData = [];
-
-        savedCardWeatherData =
-          JSON.parse(localStorage.getItem('fiveDayCityData')) || [];
-
-        savedCardWeatherData.push(cardData);
-
-        localStorage.setItem(
-          'fiveDayCityData',
-          JSON.stringify(savedCardWeatherData)
-        );
-      });
-    }
-  });
+var displayCurrentWeather = function (weather, searchedCity) {
+  console.log(weather, searchedCity);
 };
 
-// This function searches for a city and adds buttons for previously searched cities
-var createCityButtons = function () {
-  var savedCity = document.createElement('button');
-  savedCity.addEventListener('click', getPreviousData, false);
-  savedCity.setAttribute('class', 'search-btn btn btn-secondary');
-  savedCity.setAttribute('id', 'savedCityBtn' + searchFieldEl.value);
-  savedCity.setAttribute('style', 'margin:0.25em;');
-  savedCity.textContent = searchFieldEl.value;
-  searchAsideEl.append(savedCity);
+var getUvIndex = function (lat, lon) {
+  console.log(lat, lon);
 };
 
-// Use to test functionality of dynamic button clicks
-var getPreviousData = function () {};
+var displayUvIndex = function (index) {
+  console.log(index);
+};
 
-// event listeners
-searchBtnEl.addEventListener('click', getWeatherData);
+var fiveDayForecast = function (city) {};
+
+var displayFiveDayForecast = function (forecast) {};
+
+var previousSearch = function (previousSearch) {};
+
+var previousSearchHandler = function (event) {};
+
+citySearchForm.addEventListener('submit', formSubmit);
+
+previousSearchBtns.addEventListener('click', previousSearchHandler);
 
 // When I click on the search button it tells me if I need to enter a city name
 // A button is created for that city

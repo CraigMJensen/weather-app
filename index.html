@@ -19,52 +19,49 @@
         <h1 id="titleText">Weather Dashboard</h1>
       </div>
     </header>
-    <main id="container">
-      <aside class="city-search col-md-2">
-        <label for="city"><h2>Search for a City:</h2></label>
-        <input
-          type="text"
-          name="city"
-          onfocus="this.value=''"
-          class="form-control"
-          id="searchField"
-        /><br /><br />
-        <input
-          type="submit"
-          value="Search"
-          class="search-btn btn btn-info"
-        /><br />
-        <hr />
-        <br />
-        <div class="prevCity"></div>
-      </aside>
-      <div id="currentWeatherContainer" class="col-md-9">
-        <div id="color">
-          <div class="current-weather">
-            <h2 class="city">current city</h2>
-            <p class="temp">Current Temp:</p>
-            <p class="feels-like">Real Feels:</p>
-            <p class="humidity">Humidity:</p>
-            <p class="weather"></p>
-          </div>
-        </div>
-        <div id="fiveDayForecast">
-          <h3 class="title">5-Day Forecast</h3>
-          <div class="card-container">
-            <div class="card" style="width: 18rem">
-              <div class="card-body">
-                <h5 id="weatherCard" class="card-title"></h5>
-                <p class="card-text card-temp"></p>
-                <p class="card-text card-real-temp"></p>
-                <p class="card-text card-humidity"></p>
-                <p class="card-text card-weather"></p>
-              </div>
+
+    <main class="container-fluid">
+      <div class="row">
+        <!-- LEFT COLUMN: search form -->
+        <section class="col-12 col-md-3">
+          <!-- Insert Form  -->
+          <form class="border-style d-flex flex-column" id="cityForm">
+            <h4>Search for a City:</h4>
+            <input
+              id="cityInput"
+              type="text"
+              autofocus="true"
+              placeholder=""
+              class="text-capitalize"
+            />
+            <button type="submit" form="cityForm" class="btn btn-primary my-3">
+              Search
+            </button>
+          </form>
+
+          <div id="previousSearchBtns"></div>
+        </section>
+
+        <div class="col-12 col-md-8">
+          <section id="currentWeather" class="row border">
+            <div class="col-12">
+              <h2 id="searchedCity"></h2>
+              <div id="currentWeatherContainer" class="list-group"></div>
             </div>
-          </div>
+          </section>
+          <!-- 5 day forecast -->
+          <section id="fiveDayForecast">
+            <h2 class="col-12 mt-3" id="forecastTitle"></h2>
+            <div class="d-flex" id="forecastContainer"></div>
+          </section>
         </div>
       </div>
     </main>
     <footer></footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
