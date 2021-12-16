@@ -28,7 +28,7 @@ var formSubmit = (event) => {
 
   savedCities();
 
-  // previousSearchBtns(city);
+  previousSearch(city);
 };
 
 var savedCities = () => {
@@ -69,7 +69,7 @@ var displayCurrentWeather = (weather, searchedCity) => {
   humidityEl.classList = 'list-group-item';
 
   var windSpeedEl = document.createElement('span');
-  windSpeedEl.textContent = 'Wind Speed: ' + weather.wind.speed + 'KT';
+  windSpeedEl.textContent = 'Wind Speed: ' + weather.wind.speed + ' KTs';
   windSpeedEl.classList = 'list-group-item';
 
   citySearchDisplay.append(
@@ -157,7 +157,7 @@ var displayFiveDayForecast = (forecast) => {
 
     var windSpeed = document.createElement('div');
     windSpeed.textContent =
-      'Wind Speed: ' + dailyForecastData.wind.speed + 'KT';
+      'Wind Speed: ' + dailyForecastData.wind.speed + ' KTs';
     windSpeed.classList = 'card-body';
 
     var humidity = document.createElement('div');
@@ -198,10 +198,3 @@ var previousSearchHandler = (event) => {
 citySearchForm.addEventListener('submit', formSubmit);
 
 previousSearchBtns.addEventListener('click', previousSearchHandler);
-
-// When I click on the search button it tells me if I need to enter a city name
-// A button is created for that city
-// If I have a name entered the weather information is shown in the current weather div
-// 5 Day forecast displays at the same time
-// Values of search box are stored in local storage
-// When I click on a previously visited city it displays that cities weather information again

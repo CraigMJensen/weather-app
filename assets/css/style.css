@@ -10,51 +10,12 @@ body {
   background-image: linear-gradient(to right, #0dcaf0, darkblue);
 }
 
-.city-search {
-  text-align: center;
-  width: 25%;
-  font-size: smaller;
-  padding: 2em;
-}
-
-.search-btn {
-  border: none;
-  padding: 0.25rem;
-  width: 100%;
-  font-size: 1.6em;
-  color: white;
-  border-radius: 5px;
-}
-
-.search-btn:hover {
-  color: white;
-  background-color: darkblue;
-  transition: ease-in-out 350ms;
-}
-
-#color {
-  padding: 0.5rem;
-  background-image: linear-gradient(to right, #0dcaf0, darkblue);
-}
-
-.current-weather {
-  margin: auto;
-  width: 80%;
-  background-color: white;
-  padding: 0.5em;
-}
-
-#fiveDayForecast {
-  text-align: center;
-}
-
-.card-container {
-  display: flex;
+#forecastContainer {
   justify-content: space-evenly;
 }
 
-.card {
-  border: 2px solid darkblue;
+.btn:hover {
+  background-color: deepskyblue;
 }
 
 .low {
