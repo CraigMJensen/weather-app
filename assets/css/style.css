@@ -10,10 +10,6 @@ body {
   background-image: linear-gradient(to right, #0dcaf0, darkblue);
 }
 
-#container {
-  display: flex;
-}
-
 .city-search {
   text-align: center;
   width: 25%;
@@ -59,4 +55,16 @@ body {
 
 .card {
   border: 2px solid darkblue;
+}
+
+.low {
+  background-color: rgb(0, 255, 0);
+}
+
+.moderate {
+  background-color: rgb(218, 206, 32);
+}
+
+.high {
+  background-color: rgb(139, 0, 0);
 }
