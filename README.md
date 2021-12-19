@@ -11,4 +11,4 @@
 
 ## Website Image
 
-   * ![](./assets/img/weather-dashboard)
+   * ![](assets/img/weather-dashboard.png)
